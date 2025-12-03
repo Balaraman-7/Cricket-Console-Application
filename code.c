@@ -2,7 +2,6 @@
 #include <string.h>
 #include <stdlib.h>
 
-// Structure to store player information
 typedef struct {
     int jersey;
     char name[50];
@@ -18,12 +17,9 @@ void saveToFile(Player *players, int count);
 
 
 int main() {
-    Player players[100];  // Array to store player data
-    int count = 0;        // Number of players
+    Player players[100];  
+    int count = 0;        
     int choice;
-
-    // Load existing data from file
-
 
     printf("\n===== CRICKET APPLICATION =====\n");
 
@@ -35,7 +31,7 @@ int main() {
         printf("4. Save and Exit\n");
         printf("Enter your choice: ");
         scanf("%d", &choice);
-        getchar();  // Clear buffer
+        getchar();  
 
         switch (choice) {
             case 1:
@@ -59,7 +55,6 @@ int main() {
     return 0;
 }
 
-// Function to add a new player
 void addPlayer(Player *players, int *count) {
     if (*count >= 100) {
         printf("Player limit reached!\n");
@@ -85,7 +80,6 @@ void addPlayer(Player *players, int *count) {
     printf("Player added successfully!\n");
 }
 
-// Function to display all players
 void displayAllPlayers(Player *players, int count) {
     if (count == 0) {
         printf("\nNo players found!\n");
@@ -105,7 +99,6 @@ void displayAllPlayers(Player *players, int count) {
     }
 }
 
-// Function to update player statistics
 void updatePlayer(Player *players, int count) {
     int jersey;
     printf("\n--- UPDATE PLAYER ---\n");
@@ -115,8 +108,6 @@ void updatePlayer(Player *players, int count) {
 
     int matches[100];
     int matchCount = 0;
-
-    // Find all players with same jersey number
     for (int i = 0; i < count; i++) {
         if (players[i].jersey == jersey) {
             matches[matchCount] = i;
@@ -129,7 +120,6 @@ void updatePlayer(Player *players, int count) {
         return;
     }
 
-    // If multiple players found, ask user to choose
     if (matchCount > 1) {
         printf("\nMultiple players found with this jersey number:\n");
         for (int i = 0; i < matchCount; i++) {
@@ -160,7 +150,6 @@ void updatePlayer(Player *players, int count) {
 
         printf("Player updated successfully!\n");
     } else {
-        // Only one player found, update directly
         int playerIndex = matches[0];
         printf("Updating %s...\n", players[playerIndex].name);
 
@@ -174,7 +163,6 @@ void updatePlayer(Player *players, int count) {
     }
 }
 
-// Function to save data to file
 void saveToFile(Player *players, int count) {
     FILE *file = fopen("cricket_data.txt", "w");
 
