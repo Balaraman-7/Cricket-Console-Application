@@ -15,7 +15,7 @@ void addPlayer(Player *players, int *count);
 void displayAllPlayers(Player *players, int count);
 void updatePlayer(Player *players, int count);
 void saveToFile(Player *players, int count);
-void loadFromFile(Player *players, int *count);
+
 
 int main() {
     Player players[100];  // Array to store player data
@@ -23,7 +23,7 @@ int main() {
     int choice;
 
     // Load existing data from file
-    loadFromFile(players, &count);
+
 
     printf("\n===== CRICKET APPLICATION =====\n");
 
@@ -183,8 +183,6 @@ void saveToFile(Player *players, int count) {
         return;
     }
 
-    fprintf(file, "%d\n", count);
-
     for (int i = 0; i < count; i++) {
         fprintf(file, "%d %s %d %d\n",
                 players[i].jersey,
@@ -195,27 +193,4 @@ void saveToFile(Player *players, int count) {
 
     fclose(file);
     printf("Data saved to cricket_data.txt\n");
-}
-
-// Function to load data from file
-void loadFromFile(Player *players, int *count) {
-    FILE *file = fopen("cricket_data.txt", "r");
-
-    if (file == NULL) {
-        *count = 0;
-        return;
-    }
-
-    fscanf(file, "%d", count);
-
-    for (int i = 0; i < *count; i++) {
-        fscanf(file, "%d %s %d %d",
-               &players[i].jersey,
-               players[i].name,
-               &players[i].runs,
-               &players[i].wickets);
-    }
-
-    fclose(file);
-    printf("Data loaded from cricket_data.txt\n");
 }
